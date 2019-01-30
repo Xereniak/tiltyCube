@@ -1,0 +1,27 @@
+html{
+    height: 100%;
+}
+body{
+    font-family: "Helvetica";
+    height: 200%;
+}
+h1{
+    text-transform: uppercase;
+}
+.book{
+    color: white;
+    font-size: 36pt !important;
+}
+.orb{
+    position: absolute;
+    text-align: center;
+    line-height: 100px;
+    height: 100px;
+    width: 100px;
+    background: #ee997e;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    box-shadow: 0 5px 5px 5px #ddd;
+}
