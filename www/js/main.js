@@ -135,7 +135,7 @@ function init() {
                 var C = Math.sqrt(C2)
                 var lats = Math.sqrt(position.coords.latitude * position.coords.latitude + markerCalls[i].position.lat * markerCalls[i].position.lat)
                 // Adjust If statement back to .0004 range before build
-                if (C < 0.004) {
+                if (C < 0.0004) {
                     typeTrap = i
                     executeWay(i)
                     return typeTrap
