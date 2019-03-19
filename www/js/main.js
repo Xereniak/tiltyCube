@@ -16,6 +16,8 @@ document.addEventListener("deviceready", init, false);
 
 init()
 
+
+
 function init() {
     //    Vars
     var i, coords, watchID, map, marker, typeTrap, userPoints;
@@ -123,7 +125,6 @@ function init() {
     navigator.geolocation.getCurrentPosition(geoWin, geoLose, geoOpts);
 
     function triangulate(position) {
-        console.log("I am here")
         for (i = 0; i < markerCalls.length; i++) {
             if (markerCalls[i].position != null) {
                 var A = markerCalls[i].position.lat - position.coords.latitude;
@@ -131,9 +132,8 @@ function init() {
                 var C2 = A * A + B * B;
                 var C = Math.sqrt(C2)
                 var lats = Math.sqrt(position.coords.latitude * position.coords.latitude + markerCalls[i].position.lat * markerCalls[i].position.lat)
-                console.log(C)
                 // Adjust If statement back to .0004 range before build
-                if (C < 0.0015) {
+                if (C < 0.0004) {
                     typeTrap = i
                     executeWay(i)
                     return typeTrap
@@ -142,7 +142,6 @@ function init() {
 
         }
     }
-    console.log(typeTrap)
 
     function executeWay(typeTrap) {
         console.log("success")
@@ -157,4 +156,10 @@ function init() {
             alert(`This one help you! You gain 15 points! ${userPoints} remaining. The author left a message... "${markerCalls[i].message}"`)
         }
     }
+
+
+    // Making the points viewable from page two, which has no link
+    Dom7(document).on('page:init', '.page[data-name="page2"]', function (e) {
+        $("#points-container").html(`<p>${userPoints}</p>`)
+    });
 }
