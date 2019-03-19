@@ -14,7 +14,7 @@ var mainView = app.views.create('.view-main');
 
 document.addEventListener("deviceready", init, false);
 
-//init()
+init()
 
 
 
@@ -30,20 +30,21 @@ function init() {
     var markerCalls = [
         {
             position: {
-                lat: 49.6776404,
-                lng: -112.8593567
-            },
-            markerType: "help",
-            message: "Good luck hunting! I would put in a feature to let you make your own waypoints too, but I'm a dumb dumb that thought 4 writing/project classes would be smart to take together ;w;"
-        },
-        {
-            position: {
                 lat: 49.677408,
                 lng: -112.860944
             },
             markerType: "bomb",
             message: "People can leave somewhat less helpful enounters as well~    Well, I can anyway."
         },
+        {
+            position: {
+                lat: 49.6776404,
+                lng: -112.8593567
+            },
+            markerType: "help",
+            message: "Good luck hunting! I would put in a feature to let you make your own waypoints too, but I'm a dumb dumb that thought 4 writing/project classes would be smart to take together ;w;"
+        },
+
         {
             position: {
                 lat: 49.677742,
@@ -77,6 +78,7 @@ function init() {
         };
         markerself.setPosition(coords)
         map.setCenter(coords)
+        triangulate(position)
     }
 
 
@@ -96,7 +98,7 @@ function init() {
             center: coords,
             disableDefaultUI: true,
             clickableIcons: false,
-            gestureHandling: "none"
+            //            gestureHandling: "none"
         })
 
         function markers() {
@@ -117,7 +119,7 @@ function init() {
         }
 
         markers()
-        triangulate(position)
+
 
         navigator.geolocation.watchPosition(watchSuccess, geoLose, geoOpts)
     }
@@ -133,7 +135,7 @@ function init() {
                 var C = Math.sqrt(C2)
                 var lats = Math.sqrt(position.coords.latitude * position.coords.latitude + markerCalls[i].position.lat * markerCalls[i].position.lat)
                 // Adjust If statement back to .0004 range before build
-                if (C < 0.0004) {
+                if (C < 0.004) {
                     typeTrap = i
                     executeWay(i)
                     return typeTrap
