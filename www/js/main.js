@@ -14,7 +14,7 @@ var mainView = app.views.create('.view-main');
 
 document.addEventListener("deviceready", init, false);
 
-init()
+//init()
 
 
 
