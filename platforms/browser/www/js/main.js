@@ -12,7 +12,7 @@ var app = new Framework7({
 
 var mainView = app.views.create('.view-main');
 
-var x, y, z
+var x, y, z, r, g, b
 
 if (window.DeviceOrientationEvent) {
     window.addEventListener("deviceorientation", handleOrientation);
@@ -27,6 +27,10 @@ function handleOrientation(event) {
 
     $("#x").html("<p>X:" + x + "</p>")
     //    alert("hi")
+
+    r = map(z, 0, 360, 0, 255)
+    g = map(x, -90, 90, 0, 255)
+    b = map(y, -180, 180, 0, 255)
 }
 
 function setup() {
@@ -35,7 +39,7 @@ function setup() {
 }
 
 function draw() {
-    fill(z, x, y)
+    fill(r, g, b)
     $(document).on("click", function (e) {
         //        console.log(e.clientX + " " + e.clientY)
         ellipse(e.clientX, e.clientY, 40, 40)
