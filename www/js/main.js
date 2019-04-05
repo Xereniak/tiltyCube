@@ -1,18 +1,20 @@
-var app = new Framework7({
-    //    INITIALIZE APP
-    root: '#app',
-
-    routes: [
-        {
-            path: '/page2/',
-            url: 'pages/page2.html'
-        }
-    ]
-});
-
-var mainView = app.views.create('.view-main');
+//var app = new Framework7({
+//    //    INITIALIZE APP
+//    root: '#app',
+//
+//    routes: [
+//        {
+//            path: '/page2/',
+//            url: 'pages/page2.html'
+//        }
+//    ]
+//});
+//
+//var mainView = app.views.create('.view-main');
 
 var x, y, z, r, g, b
+
+StatusBar.hide()
 
 if (window.DeviceOrientationEvent) {
     window.addEventListener("deviceorientation", handleOrientation);
@@ -25,26 +27,39 @@ function handleOrientation(event) {
     x = event.beta
     y = event.gamma
 
-    $("#x").html("<p>X:" + x + "</p>")
-    //    alert("hi")
 
-    r = map(z, 0, 360, 0, 255)
-    g = map(x, -90, 90, 0, 255)
-    b = map(y, -180, 180, 0, 255)
 }
 
 function setup() {
     var cnv = createCanvas(displayWidth, displayHeight)
     cnv.parent('p5Container')
+    engine = Engine.create()
+
+    // create two boxes and a ground
+    var boxA = Bodies.rectangle(400, 200, 80, 80);
+    var boxB = Bodies.rectangle(450, 50, 80, 80);
+    var ground = Bodies.rectangle(400, 610, 810, 60, {
+        isStatic: true
+    });
+
+    // add all of the bodies to the world
+    World.add(engine.world, [boxA, boxB, ground]);
+
+    // run the engine
+    Engine.run(engine);
 }
 
 function draw() {
-    fill(r, g, b)
-    $(document).on("click", function (e) {
-        //        console.log(e.clientX + " " + e.clientY)
-        ellipse(e.clientX, e.clientY, 40, 40)
-    })
-    //    ellipse(, 50, 160, 80)
+
 }
 
-//console.log($(document).mousedown())
+// Setting up the Matter.JS scripts
+
+// module aliases
+var Engine = Matter.Engine,
+    World = Matter.World,
+    Bodies = Matter.Bodies;
+
+// create an engine
+
+// create a renderer

@@ -3,3 +3,14 @@ h1 {
     top: 5%;
     left: 50%;
 }
+
+body {
+    position: relative;
+}
+
+.floating-integers {
+    position: fixed;
+    font-family: 'Helvetica';
+    color: white;
+    opacity: 50%;
+}
